@@ -6697,6 +6697,9 @@ button {
   width: 800px;
   height: 450px;
   border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #card2 {
   margin: 0;
@@ -6736,7 +6739,7 @@ button {
 .chart-explanation {
   margin-top: 10px;
   align-self: stretch;
-  width:auto;
+  width: auto;
   flex-basis: auto;
   position: relative;
   height: 29px;
@@ -6834,6 +6837,10 @@ body.noscroll {
 }
 .a-element-active {
   color: #5c5c5c !important;
+}
+.chartbox img {
+  width: auto;
+  height: 100%;
 }
 
 /* COVER */
