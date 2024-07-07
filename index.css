@@ -73,12 +73,12 @@ button {
   justify-content: flex-end;
   align-items: flex-start;
   gap: 26px;
-  position: absolute;
+  position: fixed;
   top: 2vh;
   right: 2vh;
   z-index: 10000;
 }
-.indexbox {
+/* .indexbox {
   opacity: 0;
   display: flex;
   width: 283px;
@@ -89,7 +89,20 @@ button {
   border-radius: 4px;
   background: rgba(92, 92, 92, 0.92);
   backdrop-filter: blur(2px);
+} */
+#indexbox {
+  opacity: 0;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 283px;
+  padding: 17px 14px;
+  border-radius: 4px;
+  background: rgba(92, 92, 92, 0.92);
+  backdrop-filter: blur(2px);
 }
+
 .thishere {
   display: flex;
   flex-direction: column;
@@ -1389,7 +1402,7 @@ button {
   align-items: flex-start;
   justify-content: flex-end;
   position: relative;
-  top: 800px;
+  top: 1000px;
   width: 579.2px;
   height: 254px;
   margin: 0 0 0 413.6px;
@@ -6672,8 +6685,8 @@ button {
   z-index: 1000;
   opacity: 0;
   transition: opacity 0.5s;
-  width: auto;
-  height: 600px;
+  width: 900px;
+  height: 650px;
   margin: 0 auto;
   padding: 47px 42px 47px 42px;
   background: rgba(66, 66, 66, 0.74);
@@ -6713,7 +6726,7 @@ button {
   height: 24px;
   color: #ffffff;
   font-family: PingFang SC, var(--default-font-family);
-  font-size: 17px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 23.8px;
   text-align: left;
@@ -6721,17 +6734,18 @@ button {
   z-index: 2;
 }
 .chart-explanation {
-  flex-shrink: 0;
+  margin-top: 10px;
+  align-self: stretch;
+  width:auto;
   flex-basis: auto;
   position: relative;
   height: 29px;
   color: #ffffff;
   font-family: PingFang SC, var(--default-font-family);
-  font-size: 21px;
+  font-size: 17px;
   font-weight: 400;
   line-height: 29px;
   text-align: left;
-  white-space: nowrap;
   z-index: 3;
 }
 
