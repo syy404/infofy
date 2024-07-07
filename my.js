@@ -40,6 +40,86 @@ document.addEventListener("DOMContentLoaded", function () {
   addme(".text-93", "animate-hang");
   addme(".text-97", "animate-hang");
 
+  /* MENU */
+  function menu() {}
+  menu();
+  let ringboxClicked = false;
+  $("#ringbox").click(function () {
+    $("#indexbox").fadeToggle(500, function () {
+      if ($("#indexbox").is(":visible")) {
+        $("#indexbox").css("opacity", "1");
+      } else {
+        $("#indexbox").css("opacity", "0");
+      }
+    });
+    $("#ring").attr("src", "assets/images/menu.svg");
+    $(".ring").removeClass("buzzout");
+    ringboxClicked = true;
+  });
+
+  $(document).click(function (event) {
+    if (!$(event.target).closest("#ringbox, #indexbox").length) {
+      $("#indexbox").fadeOut(500, function () {
+        $("#indexbox").css("opacity", "0");
+      });
+      $("#thishere").remove();
+    }
+  });
+
+  $("#2chpt0").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt0").offset().top,
+      },
+      500
+    );
+  });
+
+  $("#2chpt1").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt1").offset().top,
+      },
+      500
+    );
+  });
+
+  $("#2chpt2").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt2").offset().top,
+      },
+      500
+    );
+  });
+
+  $("#2chpt3").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt3").offset().top,
+      },
+      500
+    );
+  });
+
+  $("#2chpt4").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt4").offset().top,
+      },
+      500
+    );
+  });
+
+  $("#2chpt5").click(function () {
+    $("html, body").animate(
+      {
+        scrollTop: $("#nowchpt5").offset().top,
+      },
+      500
+    );
+  });
+
   /* CHARTS */
   function duidie() {
     var dom = document.getElementById("duidie");

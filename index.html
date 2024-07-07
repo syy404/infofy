@@ -12,9 +12,49 @@
     mce_href=”/favicon.ico” type=”image/x-icon”>
   </head>
   <body>
+    <div class="trick">
+      <div class="indexbox">
+        <div class="thishere" id="thishere">
+          <span class="click-here">我们知道你会点击这里！</span
+          ><span class="notification"
+            >点击这种通知能够刺激人的愉悦感，让我们无意识地分心关注手中设备的消息。</span
+          >
+        </div>
+        <div class="mulu"><span>目录</span></div>
+        <div class="mulucontent">
+          <div class="chpt" id="2chpt0"><span>0-首页</span></div>
+          <div class="chpt" id="2chpt1">
+            <span>1-推荐算法的诞生：<br />UGC兴盛</span>
+          </div>
+          <div class="chpt" id="2chpt2">
+            <span>2-推荐算法的发展：<br />市场膨胀</span>
+          </div>
+          <div class="chpt" id="2chpt3">
+            <span>3-推荐算法带来危机：<br />控制我们的想象边界</span>
+          </div>
+          <div class="chpt" id="2chpt4">
+            <span>4-推荐算法的机制与影响：<br />分化或同质</span>
+          </div>
+          <div class="chpt" id="2chpt5">
+            <span>5-推荐算法的治理：<br />算法审计</span>
+          </div>
+        </div>
+      </div>
+      <div class="ringbox hvr-grow" id="ringbox">
+        <div class="ringbg">
+          <img src="assets/images/ringbg.svg" alt="ringbg" id="ringbg" />
+        </div>
+        <div class="ring buzzout">
+          <img src="assets/images/ring.svg" alt="ring" id="ring" />
+        </div>
+        <div class="one">
+          <img src="assets/images/one.svg" alt="1" id="one" />
+        </div>
+      </div>
+    </div>
     <div class="main-container">
       <div class="macbook-air">
-        <div class="groupthis"></div>
+        <div class="groupthis" id="nowchpt0"></div>
         <span class="whythis">为何、</span>
         <div class="bubblethis"></div>
         <div class="rectanglethis"></div>
@@ -22,7 +62,7 @@
         ><span class="recommendation-algorithmthis">推荐算法的内容牢笼</span
         ><span class="how-to-solvethis">何解？</span>
       </div>
-      <div class="cpt">
+      <div class="cpt" id="nowchpt1">
         <div class="empty">
           <div class="layer">
             <div class="flex-row-ca">
@@ -108,7 +148,7 @@
           <span class="platform-introduction">推荐算法就此被引入平台。</span>
         </div>
       </div>
-      <div class="cpt-e">
+      <div class="cpt-e" id="nowchpt2">
         <div class="empty-f">
           <div class="research">
             <span class="research-intro"
@@ -162,7 +202,7 @@
           /></span>
         </div>
       </div>
-      <div class="empty-1f">
+      <div class="empty-1f" id="nowchpt3">
         <div class="layer-20">
           <div class="rectangle-21">
             <div class="rectangle-22"></div>
@@ -360,7 +400,7 @@
           >
           <div class="hamburger"></div>
           <span class="fast-food"
-            >还记得我们一开始为大家呈现的小实验吗？如果你有留心结果，有一个事实含在其中：占据着大部分人主页的，是兴趣内容和娱乐化内容。<br /><br />平台不断为我们提供我们喜欢的内容，如同每天将心爱的食物喂到人嘴边，“餍足”之后会让人产生沉迷和依赖。而娱乐化的内容则更像送货上门的快餐，让人觉得便利、轻松或者好消化，虽然不甚美味，但点餐已经成了习惯。此时我们已经分不清快餐算不算我们喜欢的餐饮了。</span
+            >如果你有留心身边，一个事实含在其中：占据着大部分人主页的，是兴趣内容和娱乐化内容。<br /><br />平台不断为我们提供我们喜欢的内容，如同每天将心爱的食物喂到人嘴边，“餍足”之后会让人产生沉迷和依赖。而娱乐化的内容则更像送货上门的快餐，让人觉得便利、轻松或者好消化，虽然不甚美味，但点餐已经成了习惯。此时我们已经分不清快餐算不算我们喜欢的餐饮了。</span
           >
           <div class="sand"></div>
           <div class="rectangle-85"></div>
@@ -490,7 +530,7 @@
         </div>
       </div>
       <div class="box-24">
-        <div class="div">
+        <div class="div" id="nowchpt4">
           <div class="div-layer">
             <div class="div-light rellax" data-rellax-speed="2"></div>
             <div class="div-light-bd"></div>
@@ -630,7 +670,7 @@
         </div>
       </div>
       <div class="cpt-c9">
-        <div class="wrapper-37">
+        <div class="wrapper-37" id="nowchpt5">
           <div class="div-bubble rellax" data-rellax-speed="3"></div>
           <div class="layer-ca">
             <span class="algorithm-governance rellax" data-rellax-speed="2"
@@ -851,6 +891,7 @@
       <span class="chart-description">这是关于图表的说明！</span
       ><span class="chart-explanation">这是关于图表的解释！</span>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="lib/echarts.min.js"></script>
     <script src="lib/rellax.min.js"></script>
     <script src="my.js"></script>
