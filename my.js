@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   var rellax = new Rellax(".rellax");
-
+  ScrollReveal().reveal('.reveal');
   /*  console.log("Rellax instance:", rellax);
 
   document.querySelectorAll(".rellax").forEach((el) => {
@@ -40,6 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
   addme(".text-93", "animate-hang");
   addme(".text-97", "animate-hang");
 
+  addme(".text-7e", "glow-animation");
+  addme(".text-82", "glow-animation");
+  addme(".text-8f", "glow-animation");
+  addme(".text-93", "glow-animation");
+  addme(".text-97", "glow-animation");
   /* MENU */
   let ringboxClicked = false;
 
