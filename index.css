@@ -41,19 +41,26 @@ button {
 }
 /* TRICK */
 .ringbox {
-  width: 73.765px;
-  height: 66px;
+  width: 70px;
+  height: 70px;
   position: relative;
-  /*   top: 2vh;
-  right: 2vh; */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url(assets/images/ringbg.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: visible; /* 允许溢出元素显示 */
 }
 .ring {
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 33px;
   height: 33px;
-  top: -39px;
-  right: -4px;
 }
+
 .ringbg {
   position: relative;
   width: 63px;
@@ -61,12 +68,12 @@ button {
   top: 10px;
   right: 10px;
 }
-.one {
-  position: relative;
+.onebox {
+  position: absolute;
   width: 25px;
   height: 25px;
-  top: -90px;
-  right: -34px;
+  top: -2px; /* 相对于ringbox的左上角 */
+  right: 0;
 }
 .trick {
   display: inline-flex;
@@ -93,13 +100,14 @@ button {
 #indexbox {
   opacity: 0;
   display: none;
+  width: 373px;
+  padding: 22px 30px;
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  width: 283px;
-  padding: 17px 14px;
-  border-radius: 4px;
-  background: rgba(92, 92, 92, 0.92);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 8px 8px 7.8px 0px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
 }
 
@@ -111,26 +119,34 @@ button {
   align-self: stretch;
 }
 .thishere span {
-  color: #fff;
   font-family: "PingFang SC regular";
-  font-size: 17px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-decoration-line: underline;
   align-self: stretch;
+  text-align: justify;
+  color: #5f5f5f;
+  font-style: normal;
+  font-weight: 400;
+}
+.mulubox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 19px;
 }
 .mulu {
   display: flex;
-  padding: 0px 11px;
+  width: 307px;
+  height: 38px;
   align-items: flex-start;
   gap: 10px;
-  align-self: stretch;
 }
 .mulu span {
-  color: #fff;
-  font-family: "PingFang SC Bold";
-  font-size: 19.412px;
+  color: #000;
+  font-family: "Microsoft YaHei UI";
+  font-size: 30px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -144,20 +160,34 @@ button {
 }
 .chpt {
   display: flex;
-  height: auto;
-  padding: 0px 11px;
+  padding: 6px 11px;
   align-items: flex-start;
-  gap: 10px;
+  gap: 21px;
   align-self: stretch;
 }
-.chpt span {
-  color: #fff;
-  font-family: "PingFang SC regular";
+.serial {
+}
+.chptbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.chptname {
+  color: #000;
+  font-family: "PingFang SC";
   font-size: 17px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  flex: 1 0 0;
+}
+.chptdetail {
+  color: #777;
+  font-family: "PingFang SC";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .main-container {
@@ -6791,16 +6821,17 @@ button {
   animation: hang 2s infinite;
 }
 
-@keyframes glow {  
-  0%, 100% {  
-    box-shadow: 0 0 5px rgba(80, 0, 241, 0.5); 
-  }  
-  50% {  
-    box-shadow: 0 0 15px rgba(80, 0, 241, 1);  
-  }  
-}   
-.glow-animation {  
-  animation: glow 2s infinite; /* 使用上面定义的关键帧，持续2秒，无限循环 */  
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px rgba(80, 0, 241, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(80, 0, 241, 1);
+  }
+}
+.glow-animation {
+  animation: glow 2s infinite; /* 使用上面定义的关键帧，持续2秒，无限循环 */
 }
 
 .hvr-color-sweep-to-right {
@@ -6816,7 +6847,6 @@ button {
 .hvr-color-sweep-to-right:focus,
 .hvr-color-sweep-to-right:active {
   background-position: -100% 0;
-  
 }
 
 /* CHART */
@@ -6962,8 +6992,6 @@ body.noscroll {
 
 /* Grow */
 .hvr-grow {
-  display: inline-block;
-  vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -7067,8 +7095,6 @@ body.noscroll {
 }
 
 .buzzout {
-  display: inline-block;
-  vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
@@ -7080,4 +7106,40 @@ body.noscroll {
   animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+}
+
+/* Reveal */
+.hvr-reveal {
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+.hvr-reveal:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  border-color: #5000F1;
+  border-style: solid;
+  border-width: 0;
+  -webkit-transition-property: border-width;
+  transition-property: border-width;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.hvr-reveal:hover:before,
+.hvr-reveal:focus:before,
+.hvr-reveal:active:before {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  border-width: 4px;
+  border-radius: 8px;
 }

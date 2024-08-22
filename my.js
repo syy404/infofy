@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   var rellax = new Rellax(".rellax");
-  ScrollReveal().reveal('.reveal');
+  ScrollReveal().reveal(".reveal");
   /*  console.log("Rellax instance:", rellax);
 
   document.querySelectorAll(".rellax").forEach((el) => {
@@ -47,30 +47,43 @@ document.addEventListener("DOMContentLoaded", function () {
   addme(".text-97", "glow-animation");
   /* MENU */
   let ringboxClicked = false;
-
   $("#ringbox").click(function () {
     if ($("#indexbox").is(":visible")) {
-      $("#indexbox").fadeOut(500, function () {
-        $("#indexbox").css("opacity", "0");
-      });
+      $("#indexbox")
+        .addClass("animate__animated animate__fadeOutRight")
+        .one("animationend", function () {
+          $(this).hide().removeClass("animate__animated animate__fadeOutRight");
+        });
     } else {
       $("#indexbox")
         .css("opacity", "0")
-        .fadeIn(500, function () {
-          $("#indexbox").css("opacity", "1");
+        .show()
+        .addClass("animate__animated animate__fadeInRight")
+        .one("animationend", function () {
+          $(this)
+            .css("opacity", "1")
+            .removeClass("animate__animated animate__fadeInRight");
         });
     }
-    $("#ring").attr("src", "assets/images/menu.svg");
+
+    $("#ring").fadeOut(200, function () {
+      $(this).attr("src", "assets/images/menu.svg").fadeIn(200);
+    });
+
     $(".ring").removeClass("buzzout");
     ringboxClicked = true;
   });
 
   $(document).click(function (event) {
     if (!$(event.target).closest("#ringbox, #indexbox").length) {
-      $("#indexbox").fadeOut(500, function () {
-        $("#indexbox").css("opacity", "0");
+      $("#indexbox")
+        .addClass("animate__animated animate__fadeOutRight")
+        .one("animationend", function () {
+          $(this).hide().removeClass("animate__animated animate__fadeOutRight");
+        });
+      $("#thishere").animate({ height: 0, opacity: 0 }, 500, function () {
+        $(this).remove();
       });
-      $("#thishere").remove();
     }
   });
 
@@ -623,7 +636,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "乐趣",
             "满足感",
             "我的世界",
-           /*  "教程",
+            /*  "教程",
             "轻松家庭",
             "猫猫",
             "绘画",
