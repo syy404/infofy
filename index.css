@@ -51,8 +51,8 @@ button {
   position: relative;
   width: 33px;
   height: 33px;
-  top: -37px;
-  right: -5px;
+  top: -39px;
+  right: -4px;
 }
 .ringbg {
   position: relative;
@@ -328,7 +328,7 @@ button {
   position: absolute;
   width: 282.183px;
   height: 249.6px;
-  top: 205.999px;
+  top: 100px;
   left: 0;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/f99e170053dd16fc50d70776a2e37cfe82f02b3b.png)
     no-repeat center;
@@ -350,7 +350,7 @@ button {
   position: absolute;
   width: 444.004px;
   height: 254px;
-  top: 0;
+  top: -385px;
   left: 550.399px;
   color: #5000f1;
   font-family: Microsoft YaHei UI, var(--default-font-family);
@@ -368,7 +368,7 @@ button {
   position: absolute;
   width: 329px;
   height: 106px;
-  top: 150.801px;
+  top: -210px;
   left: 0;
   color: #5000f1;
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -1134,7 +1134,7 @@ button {
   position: absolute;
   width: 442.4px;
   height: 195.6px;
-  top: 0;
+  top: 415px;
   left: 587.2px;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/be93cf7f111d70f07bd065ebf444b265f3f2c5cc.png)
     no-repeat center;
@@ -1162,7 +1162,7 @@ button {
   position: absolute;
   width: 343.252px;
   height: 363.965px;
-  top: 232.402px;
+  top: -100px;
   left: 0;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/43934a4a-a2b4-4e63-8302-ffd7401da3bb.png)
     no-repeat center;
@@ -1261,7 +1261,7 @@ button {
   position: absolute;
   width: 444.004px;
   height: 254px;
-  top: 587px;
+  top: -100px;
   left: 550.399px;
   color: #5000f1;
   font-family: Microsoft YaHei UI, var(--default-font-family);
@@ -1279,7 +1279,7 @@ button {
   position: absolute;
   width: 329px;
   height: 106px;
-  top: 619px;
+  top: -185px;
   left: 0;
   color: #5000f1;
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -1402,7 +1402,7 @@ button {
   align-items: flex-start;
   justify-content: flex-end;
   position: relative;
-  top: 1000px;
+  top: -50px;
   width: 579.2px;
   height: 254px;
   margin: 0 0 0 413.6px;
@@ -1440,7 +1440,7 @@ button {
   position: absolute;
   width: 329px;
   height: 106px;
-  top: 511px;
+  top: -140px;
   left: 0;
   color: #5000f1;
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -2729,7 +2729,7 @@ button {
   position: absolute;
   width: 337.783px;
   height: 420px;
-  top: 1000px;
+  top: 20px;
   left: 38px;
   color: rgba(212, 212, 212, 0.46);
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -2875,7 +2875,7 @@ button {
   position: absolute;
   width: 415.95px;
   height: 420px;
-  top: 1470px;
+  top: 10px;
   left: 461.224px;
   color: rgba(212, 212, 212, 0.46);
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -3537,7 +3537,7 @@ button {
   position: absolute;
   width: 611.192px;
   height: 280px;
-  top: 2323px;
+  top: 50px;
   left: 327.504px;
   color: rgba(212, 212, 212, 0.46);
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -4157,7 +4157,7 @@ button {
   z-index: 293;
 }
 .div-light {
-  top: 3200px;
+  top: 10px;
   position: relative;
   width: 293.991px;
   height: 195.035px;
@@ -4207,7 +4207,7 @@ button {
   position: absolute;
   width: 804.312px;
   height: 804.144px;
-  top: 3400px;
+  top: -277px;
   left: 68.8px;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/505d8d11-a3f1-4d64-ba32-87b7f72c0f53.png)
     no-repeat center;
@@ -5249,7 +5249,7 @@ button {
   border-radius: 10px;
 }
 .algorithm-governance {
-  top: 3900px;
+  top: 100px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
@@ -5280,7 +5280,7 @@ button {
   position: absolute;
   width: 329px;
   height: 106px;
-  top: 4400px;
+  top: -50px;
   left: 0;
   color: #5000f1;
   font-family: Microsoft YaHei, var(--default-font-family);
@@ -6255,7 +6255,7 @@ button {
   position: absolute;
   width: 934px;
   height: 508px;
-  top: 3932px;
+  top: 250px;
   left: 110px;
   color: rgba(212, 212, 212, 0.46);
   font-family: Microsoft YaHei UI, var(--default-font-family);
@@ -6791,6 +6791,18 @@ button {
   animation: hang 2s infinite;
 }
 
+@keyframes glow {  
+  0%, 100% {  
+    box-shadow: 0 0 5px rgba(80, 0, 241, 0.5); 
+  }  
+  50% {  
+    box-shadow: 0 0 15px rgba(80, 0, 241, 1);  
+  }  
+}   
+.glow-animation {  
+  animation: glow 2s infinite; /* 使用上面定义的关键帧，持续2秒，无限循环 */  
+}
+
 .hvr-color-sweep-to-right {
   color: transparent; /* 初始文字颜色透明 */
   background-image: linear-gradient(to right, #ebebeb 50%, #5c5c5c 50%);
@@ -6804,6 +6816,7 @@ button {
 .hvr-color-sweep-to-right:focus,
 .hvr-color-sweep-to-right:active {
   background-position: -100% 0;
+  
 }
 
 /* CHART */
