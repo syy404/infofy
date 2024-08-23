@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  
   var rellax = new Rellax(".rellax");
   ScrollReveal().reveal(".reveal");
   /*  console.log("Rellax instance:", rellax);
@@ -882,4 +883,382 @@ document.addEventListener("DOMContentLoaded", function () {
   getchart("getchart3", "card3");
   getchart("getchart4", "card4");
   getchart("getchart5", "card5");
+
+  /* PSCHART */
+  function getdensitymap() {
+    var margin = { top: 20, right: 30, bottom: 20, left: 50 },
+      width = 250 - margin.left - margin.right,
+      height = 250 - margin.top - margin.bottom;
+
+    function createDensityMap(cityType, divId) {
+      var svg = d3
+        .select("#" + divId)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      d3.json("/data/video/5.json", function (data) {
+        var filteredData = data.filter(function (d) {
+          return d.city === cityType;
+        });
+
+        var x = d3.scaleLinear().domain([0, 0.8]).range([0, width]);
+
+        var xAxis = svg
+          .append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x).tickSize(0));
+
+        xAxis
+          .selectAll("text")
+          .style("font-family", "微软雅黑")
+          .style("font-size", "10px")
+          .style("fill", "#FFFFFF")
+          .attr("dy", "13px");
+
+        xAxis.selectAll("path, line").style("stroke", "#FFFFFF");
+
+        svg
+          .append("text")
+          .attr("text-anchor", "end")
+          .attr("x", width / 2 + margin.left + 80)
+          .attr("y", height + margin.top + 20)
+          .text("信息密度指数")
+          .style("font-size", "15px")
+          .style("fill", "#FFFFFF");
+
+        var y = d3.scaleLinear().domain([0, 0.8]).range([height, 0]);
+
+        var yAxis = svg.append("g").call(d3.axisLeft(y).tickSize(0));
+
+        yAxis
+          .selectAll("text")
+          .style("font-family", "微软雅黑")
+          .style("font-size", "10px")
+          .style("fill", "#FFFFFF")
+          .attr("dx", "-5px");
+
+        yAxis.selectAll("path, line").style("stroke", "#FFFFFF");
+
+        yAxis
+          .selectAll("text")
+          .filter(function (d) {
+            return d === 0;
+          })
+          .remove();
+
+        svg
+          .append("text")
+          .attr("text-anchor", "end")
+          .attr("transform", "rotate(-90)")
+          .attr("x", -height / 2 + margin.bottom + 80)
+          .attr("y", -margin.left + 15)
+          .text("严肃指数")
+          .style("font-family", "微软雅黑")
+          .style("font-size", "15px")
+          .style("fill", "#FFFFFF");
+
+        var color = d3
+          .scaleLinear()
+          .domain([0, 0.1, 0.4, 0.1, 0.5])
+          .range(["#faccff", "#845ec2", "#4ffbdf", "#fefedf", "#00c9a7"]);
+
+        var densityData = d3
+          .contourDensity()
+          .x(function (d) {
+            return x(d.info_density);
+          })
+          .y(function (d) {
+            return y(d.seriousness);
+          })
+          .size([width, height])
+          .bandwidth(10)(filteredData);
+
+        svg
+          .insert("g", "g")
+          .selectAll("path")
+          .data(densityData)
+          .enter()
+          .append("path")
+          .attr("d", d3.geoPath())
+          .attr("fill", function (d) {
+            return color(d.value);
+          })
+          .attr("opacity", 0) // Start with opacity 0 for animation
+          .transition() // Add transition for the opacity animation
+          .duration(2000) // Duration of 2 seconds
+          .attr("opacity", 0.5);
+      });
+    }
+
+    // Create the color scale legend once
+    function createColorLegend() {
+      var svg = d3
+        .select("#densityinter")
+        .append("svg")
+        .attr("width", 400)
+        .attr("height", 100);
+
+      var defs = svg.append("defs");
+
+      var linearGradient = defs
+        .append("linearGradient")
+        .attr("id", "linear-gradient");
+
+      linearGradient
+        .selectAll("stop")
+        .data([
+          { offset: "0%", color: "#faccff" },
+          /*    { offset: "25%", color: "#845ec2" }, */
+          { offset: "50%", color: "#845ec2" },
+          /*   { offset: "75%", color: "#4ffbdf" }, */
+          { offset: "100%", color: "#00c9a7" },
+        ])
+        .enter()
+        .append("stop")
+        .attr("offset", function (d) {
+          return d.offset;
+        })
+        .attr("stop-color", function (d) {
+          return d.color;
+        });
+
+      // Draw the rectangle and fill with gradient
+      svg
+        .append("rect")
+        .attr("x", 50)
+        .attr("y", 0)
+        .attr("width", 300)
+        .attr("height", 20)
+        .style("fill", "url(#linear-gradient)");
+
+      // Add labels for the legend
+      svg
+        .append("text")
+        .attr("x", 10)
+        .attr("y", 15)
+        .text("低密度")
+        .style("font-size", "12px")
+        .style("fill", "#FFFFFF");
+
+      svg
+        .append("text")
+        .attr("x", 355)
+        .attr("y", 15)
+        .text("高密度")
+        .style("font-size", "12px")
+        .style("fill", "#FFFFFF");
+    }
+
+    // Call the legend creation function once
+    createColorLegend();
+
+    // Create the density maps
+    createDensityMap("T0", "densitymap0");
+    createDensityMap("T1", "densitymap1");
+    createDensityMap("T2", "densitymap2");
+    createDensityMap("T3", "densitymap3");
+    createDensityMap("T4", "densitymap4");
+    createDensityMap("T5", "densitymap5");
+  }
+  getdensitymap();
+
+  function getkernel() {
+    // set the dimensions and margins of the graph
+    var margin = { top: 90, right: 30, bottom: 50, left: 110 },
+      width = 400 - margin.left - margin.right,
+      height = 350 - margin.top - margin.bottom;
+
+    // Function to create the chart
+    function createChart(divId, csvFile) {
+      // append the svg object to the body of the page
+      var svg = d3
+        .select("#" + divId)
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // read data
+      d3.csv(csvFile, function (data) {
+        // Get the different categories and count them
+        var categories = [
+          "like_sdize_1",
+          "comment_sdlize_1",
+          "share_sdlize_1",
+          "collect_sdlize_1",
+        ];
+        var n = categories.length;
+
+        // Compute the mean of each group
+        allMeans = [];
+        for (i in categories) {
+          currentGroup = categories[i];
+          mean = d3.mean(data, function (d) {
+            return +d[currentGroup];
+          });
+          allMeans.push(mean);
+        }
+
+        // Create a color scale using these means, with a more appropriate domain
+        var myColor = d3
+          .scaleSequential()
+          .domain([d3.min(allMeans), d3.max(allMeans)]) // Adjusted to the range of means
+          .interpolator(d3.interpolateViridis);
+
+        // Add X axis
+        var x = d3.scaleLinear().domain([0, 4]).range([0, width]);
+        svg
+          .append("g")
+          .attr("class", "xAxis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(
+            d3.axisBottom(x).tickValues([0, 2, 4, 6, 8, 10]).tickSize(-height)
+          )
+          .selectAll("text") // Select all text elements (numbers) on the X axis
+          .style("fill", "#ffffff")
+          .attr("dy", "15px") // Change the color to white
+          .select(".domain")
+          .remove();
+
+        // Add X axis label:
+        svg
+          .append("text")
+          .attr("text-anchor", "end")
+          .attr("x", width + 10)
+          .attr("y", height + 40)
+          .attr("font-size", "11px")
+          .attr("font-family", "微软雅黑")
+          .style("fill", "#ffffff")
+          .text("热度指数");
+
+        // Create a Y scale for densities
+        var y = d3.scaleLinear().domain([0, 7]).range([height, 0]); // Increased y domain to show more density
+
+        // Create the Y axis for names with customized labels and styles
+        var yName = d3
+          .scaleBand()
+          .domain(categories)
+          .range([0, height])
+          .paddingInner(1);
+
+        var yAxis = svg
+          .append("g")
+          .call(d3.axisLeft(yName).tickSize(0))
+          .style("fill", "#ffffff");
+
+        // Update the Y axis text labels with custom names and styles
+        yAxis
+          .selectAll(".tick text")
+          .text(function (d) {
+            switch (d) {
+              case "like_sdize_1":
+                return "点赞次数";
+              case "comment_sdlize_1":
+                return "评论次数";
+              case "share_sdlize_1":
+                return "分享次数";
+              case "collect_sdlize_1":
+                return "收藏次数";
+            }
+          })
+          .attr("font-size", "11px")
+          .attr("font-family", "微软雅黑")
+          .style("fill", "#ffffff")
+          .attr("transform", "translate(-5, -5)"); // Move the text up by 10px
+
+        // Remove the Y axis domain line
+        yAxis.select(".domain").remove();
+
+        // Compute kernel density estimation for each column:
+        var kde = kernelDensityEstimator(
+          kernelEpanechnikov(0.05),
+          x.ticks(100)
+        ); // Adjusted bandwidth for more variation
+        var allDensity = [];
+        for (i = 0; i < n; i++) {
+          key = categories[i];
+          density = kde(
+            data.map(function (d) {
+              return d[key];
+            })
+          );
+          allDensity.push({ key: key, density: density });
+        }
+
+        // Add areas with animation
+        svg
+          .selectAll("areas")
+          .data(allDensity)
+          .enter()
+          .append("path")
+          .attr("transform", function (d) {
+            return "translate(0," + (yName(d.key) - height) + ")";
+          })
+          .attr("fill", function (d) {
+            switch (d.key) {
+              case "like_sdize_1":
+                return "#793FDF"; // 修改为793FDF
+              case "comment_sdlize_1":
+                return "#7091F5"; // 修改为7091F5
+              case "share_sdlize_1":
+                return "#97FFF4"; // 修改为97FFF4
+              case "collect_sdlize_1":
+                return "#FFFD8C"; // 修改为FFFD8C
+              default:
+                return myColor(value); // 保持默认颜色
+            }
+          })
+          .datum(function (d) {
+            return d.density;
+          })
+          .attr("stroke", "#FFFFFF")
+          .attr("stroke-width", 0.1)
+          .attr(
+            "d",
+            d3
+              .line()
+              .curve(d3.curveBasis)
+              .x(function (d) {
+                return x(d[0]);
+              })
+              .y(function (d) {
+                return y(d[1]);
+              })
+          )
+          .attr("opacity", 0) // Start with opacity 0
+          .transition() // Add transition for the opacity animation
+          .duration(2000) // Duration of 2 seconds
+          .attr("opacity", 0.7); // End with the desired opacity
+      });
+    }
+
+    // This is what I need to compute kernel density estimation
+    function kernelDensityEstimator(kernel, X) {
+      return function (V) {
+        return X.map(function (x) {
+          return [
+            x,
+            d3.mean(V, function (v) {
+              return kernel(x - v);
+            }),
+          ];
+        });
+      };
+    }
+    function kernelEpanechnikov(k) {
+      return function (v) {
+        return Math.abs((v /= k)) <= 1 ? (0.9 * (1 - v * v)) / k : 0;
+      };
+    }
+
+    // Loop over the divs and csv files
+    for (var i = 0; i <= 5; i++) {
+      createChart("density" + i, "data/interact/" + i + ".csv");
+    }
+  }
+  getkernel();
 });
