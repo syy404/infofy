@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  
   var rellax = new Rellax(".rellax");
   ScrollReveal().reveal(".reveal");
   /*  console.log("Rellax instance:", rellax);
@@ -35,17 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     observer.observe(target);
   }
-  addme(".text-7e", "animate-hang");
-  addme(".text-82", "animate-hang");
-  addme(".text-8f", "animate-hang");
-  addme(".text-93", "animate-hang");
-  addme(".text-97", "animate-hang");
+  addme(".text-7e", "buzzout");
+  addme(".text-82", "buzzout");
+  addme(".text-8f", "buzzout");
+  addme(".text-93", "buzzout");
+  addme(".text-97", "buzzout");
 
-  addme(".text-7e", "glow-animation");
+  /*   addme(".text-7e", "glow-animation");
   addme(".text-82", "glow-animation");
   addme(".text-8f", "glow-animation");
   addme(".text-93", "glow-animation");
-  addme(".text-97", "glow-animation");
+  addme(".text-97", "glow-animation"); */
   /* MENU */
   let ringboxClicked = false;
   $("#ringbox").click(function () {
@@ -1261,4 +1260,92 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   getkernel();
+  function gotops() {
+    console.log("gotops function initiated");
+
+    // 点击 #nowgogo 触发的事件
+    $("#nowgogo").on("click", function () {
+      console.log("#nowgogo clicked");
+
+      // 禁止网页滚动
+      $("body").css("overflow", "hidden");
+      console.log("Body scroll disabled");
+
+      // body颜色变为#2B2B2B，0.5s
+      $("body").animate({ backgroundColor: "#2B2B2B" }, 500);
+      console.log("Body background color change initiated");
+
+      // 显示 #postscript，使用 animate__fadeIn 效果
+      $("#postscript")
+        .css({ display: "flex", opacity: 0 })
+        .animate({ opacity: 1 }, 500, function () {
+          console.log("#postscript displayed with opacity 1");
+        })
+        .removeClass("animate__fadeOut")
+        .addClass("animate__animated animate__fadeIn");
+
+      // 隐藏 .trick，使用 animate__fadeOut 效果
+      $(".trick")
+        .animate({ opacity: 0 }, 500, function () {
+          console.log(".trick hidden with opacity 0");
+        })
+        .removeClass("animate__fadeIn")
+        .addClass("animate__animated animate__fadeOut");
+    });
+
+    // 点击 #psexit 触发的事件
+    $("#psexit").on("click", function () {
+      console.log("#psexit clicked");
+
+      // 隐藏 #postscript，使用 animate__fadeOut 效果
+      $("#postscript")
+        .animate({ opacity: 0 }, 500, function () {
+          $(this).css("display", "none");
+          console.log("#postscript hidden with opacity 0");
+        })
+        .removeClass("animate__fadeIn")
+        .addClass("animate__animated animate__fadeOut");
+
+      // body颜色变为#FFFFFF，0.5s
+      $("body").animate({ backgroundColor: "#FFFFFF" }, 500);
+      console.log("Body background color change to #FFFFFF initiated");
+
+      // 显示 .trick，使用 animate__fadeIn 效果
+      $(".trick")
+        .animate({ opacity: 1 }, 500, function () {
+          console.log(".trick displayed with opacity 1");
+        })
+        .removeClass("animate__fadeOut")
+        .addClass("animate__fadeIn");
+
+      // 允许网页滚动
+      $("body").css("overflow", "auto");
+      console.log("Body scroll enabled");
+    });
+
+    // 鼠标移动到 .control-imagination-boundaries 上时，移除 .buzzout
+    $(".control-imagination-boundaries").on("mouseenter", function () {
+      $(this).removeClass("buzzout");
+      console.log(
+        ".buzzout class removed from .control-imagination-boundaries"
+      );
+    });
+
+    // 鼠标离开 .control-imagination-boundaries 时，恢复 .buzzout
+    $(".control-imagination-boundaries").on("mouseleave", function () {
+      $(this).addClass("buzzout");
+      console.log(".buzzout class restored to .control-imagination-boundaries");
+    });
+  }
+
+  gotops();
 });
+$(window).on("load", function () {
+  // 页面加载完成后隐藏加载页
+  $(".loader-container").fadeOut("slow");
+});
+
+// 如果页面在10秒内没有完全加载，也隐藏加载页
+setTimeout(function () {
+  $(".loader-container").fadeOut("slow");
+}, 10000); // 10000毫秒 = 10秒
