@@ -6468,6 +6468,7 @@ button {
 .team-members {
   display: flex;
   align-items: flex-start;
+  justify-content: center; 
   flex-shrink: 0;
   flex-basis: auto;
   position: relative;
@@ -6675,6 +6676,7 @@ button {
 .cuc-data-journalism {
   display: flex;
   align-items: flex-start;
+  justify-content: center; 
   flex-shrink: 0;
   flex-basis: auto;
   position: relative;
