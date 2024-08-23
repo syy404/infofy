@@ -6272,11 +6272,12 @@ button {
   z-index: 418;
 }
 .group-108 {
-  position: absolute;
+  position: -webkit-sticky; /* Safari */  
+  position: sticky;
   width: 556.88px;
   height: 653.863px;
-  top: -15000px;
-  left: 547.596px;
+  top: 0px;
+  left: 1000px;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/f48c7fa6-9406-4e05-bd09-3eaddf308911.png)
     no-repeat center;
   background-size: cover;
