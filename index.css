@@ -2787,10 +2787,10 @@ button {
 }
 .hot-time {
   position: absolute;
-  width: 524.181px;
-  height: 304.182px;
-  top: 324.283px;
-  left: 390.992px;
+  width: 396px;
+  height: 304px;
+  top: 304.283px;
+  left: 486.992px;
   background: url(https://raw.githubusercontent.com/syy404/infofy/main/assets/images/f156c2282d4203071a89998fcaebed9.png)
     no-repeat center;
   background-size: cover;
@@ -2893,9 +2893,10 @@ button {
   position: relative;
   min-width: 0;
   height: 501.192px;
-  background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/67713faa4cab0ec380abddd38d30f0317ea52b99.png)
+  top:25px;
+/*   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/67713faa4cab0ec380abddd38d30f0317ea52b99.png)
     no-repeat center;
-  background-size: cover;
+  background-size: cover; */
   z-index: 237;
 }
 .interest-boundaries {
@@ -2933,11 +2934,14 @@ button {
 }
 .douyin-chart {
   position: absolute;
-  width: 705.983px;
+  width: 606.983px;
   height: 418.426px;
-  top: 373.86px;
+  top: 375.86px;
   left: 0;
   z-index: 233;
+  background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/67713faa4cab0ec380abddd38d30f0317ea52b99.png)
+    no-repeat center;
+  background-size: cover;
   /*overflow: hidden;*/
 }
 .image {
@@ -3163,10 +3167,10 @@ button {
 }
 .sand {
   position: absolute;
-  width: 283.313px;
-  height: 322.927px;
-  top: 2730.911px;
-  left: 23.345px;
+  width: 414px;
+  height: 323px;
+  top: 2758.911px;
+  left: -100.655px;
   background: url(https://raw.githubusercontent.com/syy404/infofy/main/assets/images/91aecf74caf88520cb8e571b3d460db.png)
     no-repeat center;
   background-size: cover;
@@ -6268,11 +6272,12 @@ button {
   z-index: 418;
 }
 .group-108 {
-  position: absolute;
+  position: -webkit-sticky; /* Safari */  
+  position: sticky;
   width: 556.88px;
   height: 653.863px;
-  top: -15000px;
-  left: 547.596px;
+  top: 0px;
+  left: 1000px;
   background: url(http://information-cocoon.oss-cn-beijing.aliyuncs.com/assets/images/f48c7fa6-9406-4e05-bd09-3eaddf308911.png)
     no-repeat center;
   background-size: cover;
