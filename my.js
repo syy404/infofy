@@ -885,9 +885,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* PSCHART */
   function getdensitymap() {
-    var margin = { top: 20, right: 30, bottom: 20, left: 50 },
-      width = 250 - margin.left - margin.right,
-      height = 250 - margin.top - margin.bottom;
+    var margin = { top: 20, right: 30, bottom: 50, left: 50 },
+      width = 300 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
     function createDensityMap(cityType, divId) {
       var svg = d3
@@ -898,98 +898,101 @@ document.addEventListener("DOMContentLoaded", function () {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      d3.json("/data/video/5.json", function (data) {
-        var filteredData = data.filter(function (d) {
-          return d.city === cityType;
-        });
+      d3.json(
+        "http://sys-picgogo.oss-cn-beijing.aliyuncs.com/data/5.json",
+        function (data) {
+          var filteredData = data.filter(function (d) {
+            return d.city === cityType;
+          });
 
-        var x = d3.scaleLinear().domain([0, 0.8]).range([0, width]);
+          var x = d3.scaleLinear().domain([0, 0.8]).range([0, width]);
 
-        var xAxis = svg
-          .append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x).tickSize(0));
+          var xAxis = svg
+            .append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x).tickSize(0));
 
-        xAxis
-          .selectAll("text")
-          .style("font-family", "微软雅黑")
-          .style("font-size", "10px")
-          .style("fill", "#FFFFFF")
-          .attr("dy", "13px");
+          xAxis
+            .selectAll("text")
+            .style("font-family", "微软雅黑")
+            .style("font-size", "10px")
+            .style("fill", "#FFFFFF")
+            .attr("dy", "13px");
 
-        xAxis.selectAll("path, line").style("stroke", "#FFFFFF");
+          xAxis.selectAll("path, line").style("stroke", "#FFFFFF");
 
-        svg
-          .append("text")
-          .attr("text-anchor", "end")
-          .attr("x", width / 2 + margin.left + 80)
-          .attr("y", height + margin.top + 20)
-          .text("信息密度指数")
-          .style("font-size", "15px")
-          .style("fill", "#FFFFFF");
+          svg
+            .append("text")
+            .attr("text-anchor", "end")
+            .attr("x", width / 2 + margin.left + 80)
+            .attr("y", height + margin.top + 20)
+            .text("信息密度指数")
+            .style("font-size", "15px")
+            .style("fill", "#FFFFFF");
 
-        var y = d3.scaleLinear().domain([0, 0.8]).range([height, 0]);
+          var y = d3.scaleLinear().domain([0, 0.8]).range([height, 0]);
 
-        var yAxis = svg.append("g").call(d3.axisLeft(y).tickSize(0));
+          var yAxis = svg.append("g").call(d3.axisLeft(y).tickSize(0));
 
-        yAxis
-          .selectAll("text")
-          .style("font-family", "微软雅黑")
-          .style("font-size", "10px")
-          .style("fill", "#FFFFFF")
-          .attr("dx", "-5px");
+          yAxis
+            .selectAll("text")
+            .style("font-family", "微软雅黑")
+            .style("font-size", "10px")
+            .style("fill", "#FFFFFF")
+            .attr("dx", "-5px");
 
-        yAxis.selectAll("path, line").style("stroke", "#FFFFFF");
+          yAxis.selectAll("path, line").style("stroke", "#FFFFFF");
 
-        yAxis
-          .selectAll("text")
-          .filter(function (d) {
-            return d === 0;
-          })
-          .remove();
+          yAxis
+            .selectAll("text")
+            .filter(function (d) {
+              return d === 0;
+            })
+            .remove();
 
-        svg
-          .append("text")
-          .attr("text-anchor", "end")
-          .attr("transform", "rotate(-90)")
-          .attr("x", -height / 2 + margin.bottom + 80)
-          .attr("y", -margin.left + 15)
-          .text("严肃指数")
-          .style("font-family", "微软雅黑")
-          .style("font-size", "15px")
-          .style("fill", "#FFFFFF");
+          svg
+            .append("text")
+            .attr("text-anchor", "end")
+            .attr("transform", "rotate(-90)")
+            .attr("x", -height / 2 + margin.bottom + 80)
+            .attr("y", -margin.left + 15)
+            .text("严肃指数")
+            .style("font-family", "微软雅黑")
+            .style("font-size", "15px")
+            .style("fill", "#FFFFFF");
 
-        var color = d3
-          .scaleLinear()
-          .domain([0, 0.1, 0.4, 0.1, 0.5])
-          .range(["#faccff", "#845ec2", "#4ffbdf", "#fefedf", "#00c9a7"]);
+          var color = d3
+            .scaleLinear()
+            .domain([0, 0.1, 0.4, 0.1, 0.5])
+            .range(["#faccff", "#845ec2", "#4ffbdf", "#fefedf", "#00c9a7"]);
 
-        var densityData = d3
-          .contourDensity()
-          .x(function (d) {
-            return x(d.info_density);
-          })
-          .y(function (d) {
-            return y(d.seriousness);
-          })
-          .size([width, height])
-          .bandwidth(10)(filteredData);
+          var densityData = d3
+            .contourDensity()
+            .x(function (d) {
+              return x(d.info_density);
+            })
+            .y(function (d) {
+              return y(d.seriousness);
+            })
+            .size([width, height])
+            .bandwidth(10)(filteredData);
 
-        svg
-          .insert("g", "g")
-          .selectAll("path")
-          .data(densityData)
-          .enter()
-          .append("path")
-          .attr("d", d3.geoPath())
-          .attr("fill", function (d) {
-            return color(d.value);
-          })
-          .attr("opacity", 0) // Start with opacity 0 for animation
-          .transition() // Add transition for the opacity animation
-          .duration(2000) // Duration of 2 seconds
-          .attr("opacity", 0.5);
-      });
+          svg
+            .insert("g", "g")
+            .selectAll("path")
+            .data(densityData)
+            .enter()
+            .append("path")
+            .attr("d", d3.geoPath())
+            .attr("fill", function (d) {
+              return color(d.value);
+            })
+            .attr("opacity", 0) // Start with opacity 0 for animation
+            .transition() // Add transition for the opacity animation
+            .duration(2000) // Duration of 2 seconds
+            .attr("opacity", 0.5);
+        }
+      );
     }
 
     // Create the color scale legend once
@@ -1051,7 +1054,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .style("fill", "#FFFFFF");
     }
 
-    // Call the legend creation function once
     createColorLegend();
 
     // Create the density maps
@@ -1065,14 +1067,11 @@ document.addEventListener("DOMContentLoaded", function () {
   getdensitymap();
 
   function getkernel() {
-    // set the dimensions and margins of the graph
     var margin = { top: 90, right: 30, bottom: 50, left: 110 },
       width = 400 - margin.left - margin.right,
       height = 350 - margin.top - margin.bottom;
 
-    // Function to create the chart
     function createChart(divId, csvFile) {
-      // append the svg object to the body of the page
       var svg = d3
         .select("#" + divId)
         .append("svg")
@@ -1081,9 +1080,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-      // read data
       d3.csv(csvFile, function (data) {
-        // Get the different categories and count them
         var categories = [
           "like_sdize_1",
           "comment_sdlize_1",
@@ -1092,7 +1089,6 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
         var n = categories.length;
 
-        // Compute the mean of each group
         allMeans = [];
         for (i in categories) {
           currentGroup = categories[i];
@@ -1102,13 +1098,11 @@ document.addEventListener("DOMContentLoaded", function () {
           allMeans.push(mean);
         }
 
-        // Create a color scale using these means, with a more appropriate domain
         var myColor = d3
           .scaleSequential()
-          .domain([d3.min(allMeans), d3.max(allMeans)]) // Adjusted to the range of means
+          .domain([d3.min(allMeans), d3.max(allMeans)])
           .interpolator(d3.interpolateViridis);
 
-        // Add X axis
         var x = d3.scaleLinear().domain([0, 4]).range([0, width]);
         svg
           .append("g")
@@ -1117,13 +1111,12 @@ document.addEventListener("DOMContentLoaded", function () {
           .call(
             d3.axisBottom(x).tickValues([0, 2, 4, 6, 8, 10]).tickSize(-height)
           )
-          .selectAll("text") // Select all text elements (numbers) on the X axis
+          .selectAll("text")
           .style("fill", "#ffffff")
-          .attr("dy", "15px") // Change the color to white
+          .attr("dy", "15px")
           .select(".domain")
           .remove();
 
-        // Add X axis label:
         svg
           .append("text")
           .attr("text-anchor", "end")
@@ -1134,10 +1127,8 @@ document.addEventListener("DOMContentLoaded", function () {
           .style("fill", "#ffffff")
           .text("热度指数");
 
-        // Create a Y scale for densities
-        var y = d3.scaleLinear().domain([0, 7]).range([height, 0]); // Increased y domain to show more density
+        var y = d3.scaleLinear().domain([0, 7]).range([height, 0]);
 
-        // Create the Y axis for names with customized labels and styles
         var yName = d3
           .scaleBand()
           .domain(categories)
@@ -1149,7 +1140,6 @@ document.addEventListener("DOMContentLoaded", function () {
           .call(d3.axisLeft(yName).tickSize(0))
           .style("fill", "#ffffff");
 
-        // Update the Y axis text labels with custom names and styles
         yAxis
           .selectAll(".tick text")
           .text(function (d) {
@@ -1167,16 +1157,14 @@ document.addEventListener("DOMContentLoaded", function () {
           .attr("font-size", "11px")
           .attr("font-family", "微软雅黑")
           .style("fill", "#ffffff")
-          .attr("transform", "translate(-5, -5)"); // Move the text up by 10px
+          .attr("transform", "translate(-5, -5)");
 
-        // Remove the Y axis domain line
         yAxis.select(".domain").remove();
 
-        // Compute kernel density estimation for each column:
         var kde = kernelDensityEstimator(
           kernelEpanechnikov(0.05),
           x.ticks(100)
-        ); // Adjusted bandwidth for more variation
+        );
         var allDensity = [];
         for (i = 0; i < n; i++) {
           key = categories[i];
@@ -1188,7 +1176,6 @@ document.addEventListener("DOMContentLoaded", function () {
           allDensity.push({ key: key, density: density });
         }
 
-        // Add areas with animation
         svg
           .selectAll("areas")
           .data(allDensity)
@@ -1228,14 +1215,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 return y(d[1]);
               })
           )
-          .attr("opacity", 0) // Start with opacity 0
-          .transition() // Add transition for the opacity animation
-          .duration(2000) // Duration of 2 seconds
-          .attr("opacity", 0.7); // End with the desired opacity
+          .attr("opacity", 0)
+          .transition()
+          .duration(2000)
+          .attr("opacity", 0.7);
       });
     }
 
-    // This is what I need to compute kernel density estimation
     function kernelDensityEstimator(kernel, X) {
       return function (V) {
         return X.map(function (x) {
@@ -1254,7 +1240,6 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     }
 
-    // Loop over the divs and csv files
     for (var i = 0; i <= 5; i++) {
       createChart("density" + i, "data/interact/" + i + ".csv");
     }
@@ -1263,19 +1248,15 @@ document.addEventListener("DOMContentLoaded", function () {
   function gotops() {
     console.log("gotops function initiated");
 
-    // 点击 #nowgogo 触发的事件
     $("#nowgogo").on("click", function () {
       console.log("#nowgogo clicked");
 
-      // 禁止网页滚动
       $("body").css("overflow", "hidden");
       console.log("Body scroll disabled");
 
-      // body颜色变为#2B2B2B，0.5s
       $("body").animate({ backgroundColor: "#2B2B2B" }, 500);
       console.log("Body background color change initiated");
 
-      // 显示 #postscript，使用 animate__fadeIn 效果
       $("#postscript")
         .css({ display: "flex", opacity: 0 })
         .animate({ opacity: 1 }, 500, function () {
@@ -1284,7 +1265,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .removeClass("animate__fadeOut")
         .addClass("animate__animated animate__fadeIn");
 
-      // 隐藏 .trick，使用 animate__fadeOut 效果
       $(".trick")
         .animate({ opacity: 0 }, 500, function () {
           console.log(".trick hidden with opacity 0");
@@ -1293,11 +1273,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .addClass("animate__animated animate__fadeOut");
     });
 
-    // 点击 #psexit 触发的事件
     $("#psexit").on("click", function () {
       console.log("#psexit clicked");
 
-      // 隐藏 #postscript，使用 animate__fadeOut 效果
       $("#postscript")
         .animate({ opacity: 0 }, 500, function () {
           $(this).css("display", "none");
@@ -1306,11 +1284,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .removeClass("animate__fadeIn")
         .addClass("animate__animated animate__fadeOut");
 
-      // body颜色变为#FFFFFF，0.5s
       $("body").animate({ backgroundColor: "#FFFFFF" }, 500);
       console.log("Body background color change to #FFFFFF initiated");
 
-      // 显示 .trick，使用 animate__fadeIn 效果
       $(".trick")
         .animate({ opacity: 1 }, 500, function () {
           console.log(".trick displayed with opacity 1");
@@ -1318,12 +1294,10 @@ document.addEventListener("DOMContentLoaded", function () {
         .removeClass("animate__fadeOut")
         .addClass("animate__fadeIn");
 
-      // 允许网页滚动
       $("body").css("overflow", "auto");
       console.log("Body scroll enabled");
     });
 
-    // 鼠标移动到 .control-imagination-boundaries 上时，移除 .buzzout
     $(".control-imagination-boundaries").on("mouseenter", function () {
       $(this).removeClass("buzzout");
       console.log(
@@ -1331,7 +1305,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
     });
 
-    // 鼠标离开 .control-imagination-boundaries 时，恢复 .buzzout
     $(".control-imagination-boundaries").on("mouseleave", function () {
       $(this).addClass("buzzout");
       console.log(".buzzout class restored to .control-imagination-boundaries");
@@ -1341,11 +1314,9 @@ document.addEventListener("DOMContentLoaded", function () {
   gotops();
 });
 $(window).on("load", function () {
-  // 页面加载完成后隐藏加载页
   $(".loader-container").fadeOut("slow");
 });
 
-// 如果页面在10秒内没有完全加载，也隐藏加载页
 setTimeout(function () {
   $(".loader-container").fadeOut("slow");
-}, 10000); // 10000毫秒 = 10秒
+}, 10000);
