@@ -899,7 +899,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       d3.json(
-        "http://sys-picgogo.oss-cn-beijing.aliyuncs.com/data/5.json",
+        "https://sys-picgogo.oss-cn-beijing.aliyuncs.com/data/5.json",
         function (data) {
           var filteredData = data.filter(function (d) {
             return d.city === cityType;
